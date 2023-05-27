@@ -1,0 +1,27 @@
+
+/*nesta questao faremos um fatorial usando while*/
+
+#include<stdio.h>
+
+int fatorial (int n){
+	
+	int f = 1;
+	
+	/* o while entra com o número que foi escrtio em scanf e julga se é menor que 1*/
+	
+	while(n>1){    
+		f*=n;
+		--n;
+	}
+/*o valor de n é multiplicado com o que está armazenado em f e depois e decrementado n e o whilw só termina quando n for igual a um*/	
+
+}
+
+int main(void) {
+	int x;
+	printf("Entre com um numero:");
+	scanf("%d",&x);
+	int fat = fatorial(x);
+	printf("fatorial de %d =%d\n",x,fat);
+	return 0;
+}
