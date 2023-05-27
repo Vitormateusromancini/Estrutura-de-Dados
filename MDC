@@ -1,0 +1,37 @@
+/*Implemente uma função 
+interativa para calcular o mdc de dois numeros inteiros positivos*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int mdc (int x, int y)
+{
+  int r;
+  do
+  {
+    r = x % y;
+    x = y;
+    y = r;
+  } while (r != 0);
+  return x;
+}
+
+int main()
+{
+    int x,y;
+    int aux;
+    printf("Encontre o Maximo Divisor Comum entre Dois Numeros MDC\n");
+    printf("Informe o Primeiro Numero:");
+    scanf("%d",&x);
+    printf("Informe o Segundo Numero:");
+    scanf("%d",&y);
+    if (y > x)
+    {
+        aux = y;
+        y = x;
+        x = aux;
+    }
+    printf("O MDC(%d,%d) = %d",x,y,mdc(x,y));
+    return 0;
+}
