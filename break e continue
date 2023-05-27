@@ -1,0 +1,25 @@
+/*O código c oferece duas formas de interrupção antecipadas de determinado laço a exemplo do break:*/
+#include <stdio.h>
+
+int main(void) {
+	for(int i = 0; i<10;++i){
+		if(i==5)
+		break;
+		printf("%d ",i);
+	}
+	printf("fim\n");
+	return 0;
+}
+/*A saída deste programa será: 0 1 2 3 4 fim 
+pois, quando i tiver valor 5, o laço interrompe e finaliza por causa do comando break, passando o controle para o próximo comando após o laço que será o printf.
+O continue tambem interrompe a execução a diferença é que o laço não é automaticamente finalizado. */
+
+int main(void) {
+	for(int i = 0; i<10;++i){
+		if(i==5)
+		continue;
+		printf("%d ",i);
+	}
+	printf("fim\n");
+	return 0;
+/*gerando uma saída: 0 1 2 3 4 5 6 7 8 9 fim */
