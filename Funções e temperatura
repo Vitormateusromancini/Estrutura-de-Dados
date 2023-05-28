@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+float converter (float c)
+{
+  float f;
+  float k;
+  f=1.8*c+32;
+   return f;
+    }
+
+int main()
+{
+	float c;
+	float f;
+	float k;
+	printf("Entre com a temperatura em celsius:");
+	scanf("%f",&c);
+	f=converter(c);
+	printf("Temperatura em Fahrenheit:%f\n",f);
+	return 0;
+}
