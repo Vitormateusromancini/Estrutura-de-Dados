@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+/*funções oferecidas pelo modulo str */
+
+/*função comprimento */
+int comprimento(char*str);
+
+/*função copia */
+void copia (char*dest,char*orig);
+
+/*função concatena */
+void concatena (char*dest,char*orig);
+
+/*inicio das funçoes e outros arquivos e todos se 
+unem no arquivo fonte onde esta o int main */
+
+int main()
+{
+	char str[101],str1[51],str2[51];
+	printf("Digite uma sequenciade caracteres:");
+	scanf("%50[^\n]",str1);
+	printf("Digite uma sequenciade caracteres:");
+	scanf("%50[^\n]",str2);
+	
+	copia(str1,str2);
+	concatena(str,str2);
+	printf("Comprimento da concatenação %d\n",comprimento(str));
+	
+
+	return 0;
+}
