@@ -3,20 +3,20 @@
 /*Lista*/
 
 /*Cada elemento inserido requer uma
-alocação de memória.*/
+alocaÃ§Ã£o de memÃ³ria.*/
 
 /*Numa lista simplesmente encadeada,
-junto com a informação a ser
+junto com a informaÃ§Ã£o a ser
 armazenada, um ponteiro para o
-próximo elemento da lista (ou nó) deve
-ser incluído.*/
+prÃ³ximo elemento da lista (ou nÃ³) deve
+ser incluÃ­do.*/
 
-/*Tem um ponteiro indicando o início da lista
+/*Tem um ponteiro indicando o inÃ­cio da lista
 (prim).
 
-Cada elemento (nó) da lista tem,
-conceitualmente, dois campos: a informação
-armazenada e um ponteiro para o próximo
+Cada elemento (nÃ³) da lista tem,
+conceitualmente, dois campos: a informaÃ§Ã£o
+armazenada e um ponteiro para o prÃ³ximo
 elemento da lista.
 
 A partir do primeiro elemento da lista posso
@@ -28,7 +28,7 @@ proximo no um ponteiro invalido, ou seja, NULL
 /*Para construirmos um TAD-Lista,
 consideramos dois tipos de estruturas:*/
 
-/*uma lista que armazene números
+/*uma lista que armazene nÃºmeros
 inteiros, podemos ter uma estrutura para
 representar a lista*/
 
@@ -38,7 +38,7 @@ typedef struct lista Lista;
  	ListaNo* prim;
 };
 
-/*outra para representa um nó
+/*outra para representa um nÃ³
 dessa lista (autoreferenciada)*/
 
 typedef struct listano ListaNo;
@@ -78,10 +78,10 @@ int main (void)
 	return0;
 }
 
-/*Função de percorre a lista:
-– Uso para mostrar na tela todos os elementos
+/*FunÃ§Ã£o de percorre a lista:
+â€“ Uso para mostrar na tela todos os elementos
 da lista
-– Não permite
+â€“ NÃ£o permite
 
 /* funcao imprime: imprime valores dos elementos */
 void lst_imprime (Lista* l)
@@ -92,10 +92,10 @@ void lst_imprime (Lista* l)
 }
 
 /*
-Função que verifica se determinado
+FunÃ§Ã£o que verifica se determinado
 elemento pertence a lista:
-– Retorna 1, se o elemento pertence a lista e
-0, caso contrário
+â€“ Retorna 1, se o elemento pertence a lista e
+0, caso contrÃ¡rio
 /* funcao busca: busca um elemento na lista */
 int lst_busca (Lista* l, int v)
 {
@@ -104,3 +104,80 @@ int lst_busca (Lista* l, int v)
      if (p->info == v) return 1;
    return 0;  /* nao encontrou o elemento */
 }
+/*ManutenÃ§Ã£o da lista ordenada:
+â€“ Caso desejemos manter uma lista
+com uma determinada ordenaÃ§Ã£o,
+necessitamos encontrar a posiÃ§Ã£o
+correta da inserÃ§Ã£o, para depois
+efetivÃ¡-la
+Se for o primeiro elemento recai na inserÃ§Ã£o no
+inÃ­cio da lista, caso contrÃ¡rio se insere apÃ³s o
+anterior.
+/* insere elementos mantendo a lista em ordem crescente */
+void lst_insere_ordenado (Lista* l, int v) {
+   ListaNo* ant = NULL;       /*ponteiro para elemento anterior */
+   ListaNo* p = l->prim;      /* ponteiro para percorrer a lista*/
+   ListaNo* novo = (ListaNo*) malloc(sizeof(ListaNo));
+   novo->info = v;
+   /* localiza o ponto de insercao */
+   while (p != NULL && p->info < v) {
+        ant = p;
+        p = p->prox;
+   }
+   /* encadeia elemento */
+   if (ant == NULL) { /* insere elemento do inicio */
+      novo->prox = l->prim;
+      l->prim = novo;
+      }
+   else { /* insere elemento do meio da lista */
+      novo->prox = ant->prox;
+      ant->prox = novo;
+    }
+}
+	
+/*FunÃ§Ã£o que retira um elemento da lista: pode ser no primeiro da lista ou no meio 
+/* funcao retira: retira elemento da lista */
+void lst_retira (Lista* l,int v) {
+   ListaNo* ant = NULL;     /*ponteiro para elemento anterior */
+   ListaNo* p = l->prim;    /* ponteiro para percorrer a lista*/
+   /* procura elemento na lista, guardando anterior */
+   while (p != NULL && p->info != v) {
+        ant = p;
+        p = p->prox;
+   }
+   /* verifica se achou elemento */
+   if (p == NULL) return; /* nao achou: lista original nao se altera*/
+   /* retira elemento */
+   if (ant == NULL) {
+      /* retira elemento do inicio */
+      l->prim = p->prox;
+      }
+   else {
+      /* retira elemento do meio da lista */
+      ant->prox = p->prox;
+    }
+   free(p);
+}
+/*FunÃ§Ã£o que verifica se a lista estÃ¡ vazia e
+libera a memÃ³ria ocupada
+/* funcao vazia: retorna 1 se vazia ou 0 se nao vazia */
+int lst_vazia (Lista* l)
+{
+   if (l->prim == NULL)
+      return 1;
+   else
+      return 0;
+}
+void lst_libera (Lista* l)
+{
+   ListaNo* p = l->prim;
+   while (p != NULL) {
+      ListaNo* t = p->prox; /* guarda referencia para o proximo elemento */
+      free(p);  /* libera a memoria apontada por p */
+       p = t;   /* faz p apontar para o proximo */
+   }
+   free(l);
+}
+	
+	/*olhar os outros slides de listas com os arquivos disponiveis no moodle*/
+	
