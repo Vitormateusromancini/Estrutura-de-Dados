@@ -4,7 +4,7 @@ antecessor.
 Com isso consigo acessar tanto o
 elemento imediatamente anterior quanto
 o imediatamento posterior da lista.
-Para construirmos um TAD-Lista-Dupla, também
+Para construirmos um TAD-Lista-Dupla, tambÃ©m
 consideramos dois tipos de estruturas, da mesma
 forma que na lista de encadeamento simples:*/
 
@@ -30,7 +30,7 @@ Lista2* lst2_cria (void)
 {
     Lista2* l = (Lista2*) malloc(sizeof(Lista2));
     l->prim = NULL; /*aponta pro primeiro elemento NULL*/
-    l->ult = NULL;  /*aponta pro ÚLTIMO elemento NULL*/
+    l->ult = NULL;  /*aponta pro ÃšLTIMO elemento NULL*/
     return l;
 }
 
@@ -56,10 +56,11 @@ void lst2_insere_final (Lista2* l, int v)
     novo->info = v;
     novo->ant = l->ult;
     novo->prox = NULL;  
-    if (l->ult != NULL)
-        l->ult->prox = novo;
+    if (l->ult != NULL) /*testa se a lista esta vazia */
+        l->ult->prox = novo; /* o novo eh o proximo do antigo primeiro*/
     else
-        l->prim = novo;
-    l->ult = novo;
+        l->prim = novo;  /* novo tambem eh o primeiro*/ 
+    l->ult = novo;       /* novo eh o ultimo*/
 }
+
 
