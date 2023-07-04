@@ -349,4 +349,26 @@ void grafo_insere_aresta (Grafo* g, int orig, int dest) {
     }
 }  
 
-/*olhe os slides 44 e 45 */
+/*olhe os slides 44 e 45 
+    
+ Agora vamos ver um exemplo de DFS, depth-first search
+(Busca em Profundidade) no grafo dado inserido:*/
+
+static void idfs (Grafo* g, int i) {
+    Aresta* a; /*apontador para percorrer a lista de arestas*/
+    g->v[i].cor = CINZA;
+    g->v[i].ti = tempo(g);
+    for (a = g->v[i].lista; a != NULL; a = a->prox) {
+        int j = a->v;
+        if (g->v[j].cor == BRANCO) {
+            g->v[j].vant = i;
+            a->tipo = ARVORE;
+            idfs (g , j);
+        }
+        else if(g->v[j].cor == CINZA)
+                a->tipo = TRAS;
+             else a->tipo = OUTRA;
+    }
+    g->v[i].cor = PRETO;
+    g->v[i].tf = tempo(g);
+
